@@ -133,11 +133,12 @@ Forneça recomendação clínica com base na gravidade. Sempre responda no idiom
 
 # Função para renderizar o chat
 def render_chat(hst_conversa):
-    for i in range(1, len(hst_conversa)):
-        if i % 2 == 0:
-            msg("**DeglutBotStroke**:" + hst_conversa[i]['content'], key=f"bot_msg_{i}")
-        else:
-            msg("**You**:" + hst_conversa[i]['content'], is_user=True, key=f"user_msg_{i}")
+    for i in range(len(hst_conversa)):
+        if hst_conversa[i]['role'] == 'assistant':
+            msg("**DeglutBotStroke**: " + hst_conversa[i]['content'], key=f"bot_msg_{i}")
+        elif hst_conversa[i]['role'] == 'user':
+            msg("**You**: " + hst_conversa[i]['content'], is_user=True, key=f"user_msg_{i}")
+
 
 # Execução principal
 if not st.session_state.language_selected:
@@ -159,4 +160,4 @@ else:
         st.session_state.hst_conversa.append(
             {"role": "assistant", "content": retorno_openai['choices'][0]['message']['content']})
     if len(st.session_state.hst_conversa) > 0:
-        render_chat(st.session_state.hst_conversa)
+        _chat(st.session_state.hst_conversa)
