@@ -40,7 +40,7 @@ def select_language():
         """, unsafe_allow_html=True)
     st.markdown('<div class="centered container">', unsafe_allow_html=True)
     st.image(logo_url, use_column_width=True)
-    st.title("Welcome to DysphagiBot!")
+    st.title("Welcome to DeglutBotStroke!")
     st.subheader("Choose your language / Escolha seu idioma")
     language = st.radio("", ["English", "Português"])
     st.markdown('<br>', unsafe_allow_html=True)
@@ -54,7 +54,7 @@ def select_language():
 def setup_chatbot():
     if st.session_state.language_choice == "English":
         st.session_state.lang = {
-            "title": "I'm DysphagiBot, an AI-powered chatbot here to assist you in screening for differential diagnoses of dysphagia in patients with swallowing complaints.",
+            "title": "I’m DeglutBotStroke, an AI-powered chatbot designed to assist you in screening for stroke diagnosis in patients with swallowing complaints.",
             "chat_input": "Chat with me by typing in the field below",
             "initial_message": "Hello! Let's begin the dysphagia screening. Please answer the following questions:",
             "conditions": """You are a virtual assistant named DeglutBot Stroke. Your goal is to assist in the initial screening of dysphagia in patients with a history of Stroke based on the GUSS protocol.
