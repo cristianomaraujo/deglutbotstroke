@@ -160,4 +160,4 @@ else:
         st.session_state.hst_conversa.append(
             {"role": "assistant", "content": retorno_openai['choices'][0]['message']['content']})
     if len(st.session_state.hst_conversa) > 0:
-        _chat(st.session_state.hst_conversa)
+        render_chat(st.session_state.hst_conversa)
