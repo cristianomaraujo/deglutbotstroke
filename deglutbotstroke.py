@@ -92,7 +92,7 @@ Always respond in the language in which the question was asked. Valid only for P
         }
     else:
         st.session_state.lang = {
-            "title": "Eu sou o DysphagiBot, um chatbot com inteligência artificial aqui para ajudar na triagem de diagnósticos diferenciais de disfagia em pacientes com queixas de deglutição.",
+            "title": "Eu sou o DeglutBotStroke, um chatbot com inteligência artificial aqui para ajudar na triagem de diagnósticos diferenciais de disfagia em pacientes com queixas de deglutição.",
             "chat_input": "Converse comigo digitando no campo abaixo",
             "initial_message": "Olá! Vamos começar a triagem de disfagia. Por favor, responda às seguintes perguntas:",
             "conditions": """Você é um assistente virtual chamado DeglutBot Stroke. Seu objetivo é auxiliar na triagem inicial de disfagia em pacientes com histórico de Acidente Vascular Cerebral (AVC), baseado no protocolo GUSS.
