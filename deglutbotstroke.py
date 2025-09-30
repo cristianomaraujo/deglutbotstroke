@@ -66,10 +66,10 @@ For this session, no food will be offered.
 We will start with some initial observations. Please answer yes or no to each question:
 1) Vigilance (The patient must be alert for at least 15 minutes).
 2) Cough and/or throat clearing (voluntary cough).
-3) Saliva swallowing.
-4) Swallowing successful.
-5) Drooling.
-6) Voice change (hoarse, gurgly, coated, weak).
+"Regarding the next questions (3, 4 and 5) about saliva swallowing, please answer yes or no to each question:"
+3) Swallowing successful.
+4) Drooling.
+5) Voice change (hoarse, gurgly, coated, weak).
 The score will be calculated based on the answers to the following questions: vigilance, cough and/or throat clearing (voluntary cough), saliva swallowing, and successful swallowing. Consider (Yes = 1 point / No = 0 points). For the questions regarding drooling and voice changes (hoarseness, gurgly, wet, or weak voice), consider (Yes = 0 points / No = 1 point).
 If the total score is 5 points, proceed to the next stage. Otherwise, refer the patient for a specialized evaluation by a speech-language pathologist before offering any food.
 ### Section 2. Direct Swallowing Test (Material: Aqua bi, flat teaspoon, food thickener, bread). In the following order:
@@ -77,7 +77,7 @@ First administer 1/2 to up to a flat teaspoon Aqua bi with food thickener (puddi
 3, 5, 10, 20 ml Aqua bi - if there are no symptoms continue with 50 ml Aqua bi. Assess and stop the investigation when one of the criteria is observed.
 Clinical: dry bread; FEES: dry bread dipped in coloured liquid.
 Now we will assess swallowing with different consistencies. Follow this order: semi-solid → liquid → solid.
-For each consistency, observe: not possible (0 points), delayed (>2s or >10s for solids = 1 point), or successful (2 points).
+For each consistency—semi-solid, liquid, and solid—observe and always specify clearly the items that need to be assessed, aligning them so that they can always be answered with yes or no: not possible (0 points), delayed (>2s or >10s for solids = 1 point), or successful (2 points).
 Cough (involuntary): (Yes = 0 points / No = 1 point).
 Drooling: (Yes = 0 points / No = 1 point).
 Voice change: (Yes = 0 points / No = 1 point).
@@ -87,8 +87,12 @@ Semi-solid: 1–4 investigate further. 5: continue to liquid.
 Liquid: 1–4 investigate further. 5: continue to solid.
 Solid: 1–4 investigate further. 5: normal.
 ### FINAL INTERPRETATION (TOTAL = SECTION 1 + SECTION 2 = max 20 points):
-20: No dysphagia. 15–19: Slight. 10–14: Moderate. 0–9: Severe. Provide clinical recommendation.
-Always respond in the language in which the question was asked. Valid only for Portuguese and English."""
+Based on the total score, provide the severity of dysphagia and the recommendation in a specific manner:
+"- 20 → Semisolid/ liquid and solid texture successful. Severity code: Slight/No Dysphagia minimal risk of aspiration. Recommendations:  normal diet and regular liquids (first time under supervision of the SLT or a trained stroke nurse)."
+"- 15 - 19 → Semisolid and liquid texture successful and  Solid unsuccessful. Slight  Dysphagia with a low risk of aspiration. Recommendations: Dysphagia Diet (pureed and soft food).Liquids very slowly - one sip at a time. Funcional swallowing assessments such as Fiberoptic Endoscopic Evaluation of Swallowing (FEES) or Videofluoroscopic Evaluation of Swallowing (VFES). Refer to Speech and Language Therapist (SLT). "
+"- 10 - 14 → Semisolid swallow successful and liquids unsuccessful. Severity: Moderate dysphagia with a risk of aspiration. Recommendation: Dysphagia diet beginning with : Semisolid textures such as baby food and additional parenteral feeding. All liquids must be thickened! Pills must be crushed and mixed with thick liquid. No liquid medication! Further functional swallowing assessments (FEES, VFES).  Refer to Speech and Language Therapist (SLT).Suplementation with nasogastric tube or parenteral. "
+"- 0 - 9 → Preliminary investigation unsuccessful or semisolid swallow unsuccessful. Severity: Severe dysphagia, with a high risk of aspiration. NPO (non per os = nothing by mouth). Further functional swallowing assessment (FEES, VFES). Refer to Speech and Language Therapist (SLT). Suplementation with nasogastric tube or parenteral."
+"Always respond in the language in which the question was asked. This assistant is validated only for Portuguese and English. For other languages, inform the user of this limitation.""""
         }
     else:
         st.session_state.lang = {
@@ -161,3 +165,4 @@ else:
             {"role": "assistant", "content": retorno_openai['choices'][0]['message']['content']})
     if len(st.session_state.hst_conversa) > 0:
         render_chat(st.session_state.hst_conversa)
+
