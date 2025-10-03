@@ -136,7 +136,7 @@ Forneça recomendação clínica com base na gravidade. Sempre responda no idiom
  
    "- 10 a 14 pontos → Semi‐sólido com sucesso. Líquido sem sucesso. Gravidade: Disfagia moderada, risco de aspiração. Recomendação:  Indicar dieta semi-líquida, líquidos espessados, comprimidos esmagados e misturados em líquido espessado, não administrar medicação líquida e avaliação especializada. Suplementação com via nasogástrica ou parentérica."
    "- 0 a 9 pontos → Investigação preliminar sem sucesso ou semi-sólido sem sucesso. Gravidade: Disfagia grave, alto risco de aspiração. Recomendação: nada por via oral (NPO), via alternativa de alimentação (nasogástrica ou parenteral). Avaliação especializada."
-Forneça recomendação clínica com base na gravidade. Sempre responda no idioma da pergunta. Este assistente está validado apenas para português e inglês."""
+"Forneça recomendação clínica com base na gravidade. Sempre responda no idioma da pergunta. Este assistente está validado apenas para português e inglês."""
         }
 
 # Função para renderizar o chat
@@ -169,6 +169,7 @@ else:
             {"role": "assistant", "content": retorno_openai['choices'][0]['message']['content']})
     if len(st.session_state.hst_conversa) > 0:
         render_chat(st.session_state.hst_conversa)
+
 
 
 
