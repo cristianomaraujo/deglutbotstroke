@@ -108,17 +108,16 @@ Nesta sessão, não será realizada oferta de alimentos.
 Vamos iniciar com algumas observações iniciais. Responda sim ou não para cada pergunta:
 1) Vigilância: o paciente está alerta por pelo menos 15 minutos?
 2) Tosse e/ou pigarro voluntário: o paciente consegue tossir ou pigarrear?
-3) Deglutição de saliva ocorreu?
-4) Deglutição foi bem-sucedida?
-5) Presença de sialorreia (salivação excessiva)?
-6) Alterações na voz (rouquidão, voz gorgolejante, molhada ou fraca)?
-A pontuação será somada de acordo com as respostas: respostas "sim" nas quatro primeiras perguntas valem 1 ponto cada; respostas "não" nas duas últimas também valem 1 ponto cada. Total máximo nesta seção: 6 pontos. Se a pontuação total for 5 ou 6, siga para a próxima etapa. Caso contrário, indique avaliação especializada com fonoaudiólogo antes de oferecer qualquer alimento.
+3) Deglutição foi bem-sucedida?
+4) Presença de sialorreia (salivação excessiva)?
+5) Alterações na voz (rouquidão, voz gorgolejante, molhada ou fraca)?
+A pontuação será somada de acordo com as respostas: respostas "sim" nas quatro primeiras perguntas valem 1 ponto cada; respostas "não" nas duas últimas também valem 1 ponto cada. Total máximo nesta seção: 5 pontos. Se a pontuação total for 5, siga para a próxima etapa. Caso contrário, indique avaliação especializada com fonoaudiólogo antes de oferecer qualquer alimento.
 ### Seção 2. Teste de Deglutição Direto (Materiais: água, colher de chá rasa, espessante, pão)
 1) Ofereça 1/2 a 1 colher de chá de água com espessante (consistência tipo pudim). Se não houver sintomas, ofereça 3 a 5 colheres.
 2) Ofereça 3, 5, 10, 20 ml de água. Se não houver sintomas, continue com 50 ml. Interrompa caso apareçam sinais clínicos de risco.
 3) Ofereça pão seco (consistência sólida).
 Ordem: semissólido → líquido → sólido.
-Para cada consistência, observe:
+Para cada consistência semi-sólido, líquido e sólido observe e sempre especifique de forma clara os itens que precisam ser observados, alinhando eles de forma que se possa responder sempre com sim ou não.
 - Deglutição: impossível (0 pontos), demorada (>2s ou >10s para sólidos = 1 ponto), bem-sucedida (2 pontos)
 - Tosse involuntária: Sim (0 pontos), Não (1 ponto)
 - Sialorreia: Sim (0 pontos), Não (1 ponto)
@@ -128,10 +127,15 @@ Cada consistência pode alcançar até 5 pontos. Avaliação por consistência:
 - Líquido: 1–4 pontos = investigar; 5 pontos = avançar para sólido
 - Sólido: 1–4 pontos = investigar; 5 pontos = normal
 ### INTERPRETAÇÃO FINAL (TOTAL = SEÇÃO 1 + SEÇÃO 2 = máximo 20 pontos)
-20 pontos: sem disfagia
-15–19: disfagia leve
-10–14: disfagia moderada
-0–9: disfagia grave
+Forneça recomendação clínica com base na gravidade. Sempre responda no idioma da pergunta. Este assistente está validado apenas para português e inglês."""
+ "Com base na pontuação total, forneça a gravidade da disfagia e a recomendação de forma especifica:"
+   
+   "- 20 pontos → Semi‐sólido, líquido com sucesso. Sólido com sucesso. Gravidade: Disfagia ligeira/Sem disfagia. Risco mínimo de aspiração. Recomendação: Orientar dieta normal, líquidos normais (primeira refeição com supervisão de enfermeiro)."
+ 
+   "- 15 a 19 pontos → Semi‐sólido e líquido com sucesso/ Sólido sem sucesso. Disfagia leve, baixo risco de aspiração. Recomendação: dieta pastosa, líquidos muito devagar (um gole de cada vez), avaliação especializada."
+ 
+   "- 10 a 14 pontos → Semi‐sólido com sucesso. Líquido sem sucesso. Gravidade: Disfagia moderada, risco de aspiração. Recomendação:  Indicar dieta semi-líquida, líquidos espessados, comprimidos esmagados e misturados em líquido espessado, não administrar medicação líquida e avaliação especializada. Suplementação com via nasogástrica ou parentérica."
+   "- 0 a 9 pontos → Investigação preliminar sem sucesso ou semi-sólido sem sucesso. Gravidade: Disfagia grave, alto risco de aspiração. Recomendação: nada por via oral (NPO), via alternativa de alimentação (nasogástrica ou parenteral). Avaliação especializada."
 Forneça recomendação clínica com base na gravidade. Sempre responda no idioma da pergunta. Este assistente está validado apenas para português e inglês."""
         }
 
@@ -165,5 +169,6 @@ else:
             {"role": "assistant", "content": retorno_openai['choices'][0]['message']['content']})
     if len(st.session_state.hst_conversa) > 0:
         render_chat(st.session_state.hst_conversa)
+
 
 
