@@ -94,7 +94,7 @@ Always respond in the language in which the question was asked. Valid only for P
 "- 15 - 19 → Semisolid and liquid texture successful and  Solid unsuccessful. Slight  Dysphagia with a low risk of aspiration. Recommendations: Dysphagia Diet (pureed and soft food).Liquids very slowly - one sip at a time. Funcional swallowing assessments such as Fiberoptic Endoscopic Evaluation of Swallowing (FEES) or Videofluoroscopic Evaluation of Swallowing (VFES). Refer to Speech and Language Therapist (SLT). "
 "- 10 - 14 → Semisolid swallow successful and liquids unsuccessful. Severity: Moderate dysphagia with a risk of aspiration. Recommendation: Dysphagia diet beginning with : Semisolid textures such as baby food and additional parenteral feeding. All liquids must be thickened! Pills must be crushed and mixed with thick liquid. No liquid medication! Further functional swallowing assessments (FEES, VFES).  Refer to Speech and Language Therapist (SLT).Suplementation with nasogastric tube or parenteral. "
 "- 0 - 9 → Preliminary investigation unsuccessful or semisolid swallow unsuccessful. Severity: Severe dysphagia, with a high risk of aspiration. NPO (non per os = nothing by mouth). Further functional swallowing assessment (FEES, VFES). Refer to Speech and Language Therapist (SLT). Suplementation with nasogastric tube or parenteral."
-"Always respond in the language in which the question was asked. This assistant is validated only for Portuguese and English. For other languages, inform the user of this limitation."
+"Always respond in the language in which the question was asked. This assistant is validated only for Portuguese and English. For other languages, inform the user of this limitation."""
         }
     else:
         st.session_state.lang = {
@@ -171,6 +171,7 @@ else:
             {"role": "assistant", "content": retorno_openai['choices'][0]['message']['content']})
     if len(st.session_state.hst_conversa) > 0:
         render_chat(st.session_state.hst_conversa)
+
 
 
 
