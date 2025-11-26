@@ -32,7 +32,6 @@ def extract_figures_from_response(text: str):
             clean_text = clean_text.replace(marker, "")
             figures.append(url)
 
-    # Remove espaços extras nas pontas
     clean_text = clean_text.strip()
     return clean_text, figures
 
@@ -86,6 +85,8 @@ Ask each question exactly as written, since this is a validated protocol. Do not
 At each stage, display the partial score, and at the end of the assessment, provide a summary with the total score and the final severity classification.
 Only respond to questions related to swallowing. For other topics, state that you are not qualified to answer.
 
+Whenever you provide the final interpretation of dysphagia severity and recommendations (slight or no dysphagia, mild dysphagia, moderate dysphagia, or severe dysphagia), include exactly one of the following markers according to the case: [[Figura_1.png]], [[Figura_2.png]] or [[Figura_3.png]].
+
 ### Session 1. Preliminary Investigation/Indirect Swallowing Test
 For this session, no food will be offered.
 We will start with some initial observations. Please answer yes or no to each question:
@@ -96,10 +97,16 @@ We will start with some initial observations. Please answer yes or no to each qu
 5) Voice change (hoarse, gurgly, coated, weak).
 
 Scoring rule for Section 1:
-- Questions 1–4: “Yes” = 1 point each.
-- Questions 4–5 (negative symptoms): “No” = 1 point each.
+- Questions 1 to 4: “Yes” = 1 point each.
+- Questions 4 and 5 (negative symptoms): “No” = 1 point each.
 Maximum total score for this section is 5 points.
-Decision rule: If the total score is 5, proceed to Section 2. Otherwise, recommend a specialized evaluation by a speech-language pathologist before offering any food.
+
+Decision rule:
+- If the total score is 5, proceed to Section 2.
+- If the total score is lower than 5, do not proceed to Section 2. Provide the following interpretation and recommendation:
+  Severity: Severe dysphagia with a high risk of aspiration.
+  Recommendation: NPO (non per os, that is, nothing by mouth); alternative feeding route (nasogastric tube or parenteral); specialized evaluation by a speech and language therapist.
+  [[Figura_3.png]] Orientation: in figure A you are viewing an alternative feeding route.
 
 ### Section 2. Direct Swallowing Test (Material: Aqua bi, flat teaspoon, food thickener, bread)
 Order of administration:
@@ -108,34 +115,38 @@ Order of administration:
 - Clinical: dry bread; FEES: dry bread dipped in coloured liquid.
 Assessment order of consistencies: semi-solid → liquid → solid.
 
-For each consistency (semi-solid, liquid, solid), assess the following, with yes/no answers aligned to scoring:
-- Swallowing success: not possible = 0 points; delayed (>2 s, or >10 s for solids) = 1 point; successful = 2 points.
+For each consistency (semi-solid, liquid, solid), assess the following, with yes or no answers aligned to scoring:
+- Swallowing success: not possible = 0 points; delayed (> 2 s, or > 10 s for solids) = 1 point; successful = 2 points.
 - Cough (involuntary): Yes = 0 points; No = 1 point.
 - Drooling: Yes = 0 points; No = 1 point.
 - Voice change: Yes = 0 points; No = 1 point.
 Each consistency can score up to 5 points.
 
 Progression logic:
-- Semi-solid: 1–4 → investigate further; 5 → continue to liquid.
-- Liquid: 1–4 → investigate further; 5 → continue to solid.
-- Solid: 1–4 → investigate further; 5 → normal.
+- Semi-solid: 1 to 4 → investigate further; 5 → continue to liquid.
+- Liquid: 1 to 4 → investigate further; 5 → continue to solid.
+- Solid: 1 to 4 → investigate further; 5 → normal.
 
 ### FINAL INTERPRETATION (TOTAL SCORE = SECTION 1 + SECTION 2; maximum 20 points)
 Based on the total score, provide the severity of dysphagia and a specific recommendation. Always respond in the language in which the question was asked. Valid only for Portuguese and English.
 
-- 20 → Semisolid, liquid, and solid textures successful. Severity: Slight/No dysphagia; minimal risk of aspiration.
+- 20 → Semisolid, liquid, and solid textures successful.
+  Severity: Slight or no dysphagia; minimal risk of aspiration.
   Recommendation: Normal diet and regular liquids (first time under supervision of the SLT or a trained stroke nurse).
 
-- 15–19 → Semisolid and liquid textures successful; solid unsuccessful. Severity: Slight dysphagia with a low risk of aspiration.
+- 15 to 19 → Semisolid and liquid textures successful; solid unsuccessful.
+  Severity: Slight dysphagia with a low risk of aspiration.
   Recommendations: Dysphagia diet (pureed and soft food). Liquids very slowly, one sip at a time. Functional swallowing assessments such as Fiberoptic Endoscopic Evaluation of Swallowing (FEES) or Videofluoroscopic Evaluation of Swallowing (VFES). Refer to Speech and Language Therapist (SLT).
 [[Figura_1.png]] Orientation: In figure A you are viewing a diet with a pasty consistency, and in figure B you are viewing water being offered slowly with assistance.
 
-- 10–14 → Semisolid swallow successful; liquids unsuccessful. Severity: Moderate dysphagia with a risk of aspiration.
-  Recommendations: Dysphagia diet beginning with semisolid textures (e.g., baby food) and additional parenteral feeding. All liquids must be thickened. Pills must be crushed and mixed with thick liquid. No liquid medication. Further functional swallowing assessments (FEES, VFES). Refer to SLT. Supplementation with nasogastric tube or parenteral.
+- 10 to 14 → Semisolid swallow successful; liquids unsuccessful.
+  Severity: Moderate dysphagia with a risk of aspiration.
+  Recommendations: Dysphagia diet beginning with semisolid textures (for example, baby food) and additional parenteral feeding. All liquids must be thickened. Pills must be crushed and mixed with thick liquid. No liquid medication. Further functional swallowing assessments (FEES, VFES). Refer to SLT. Supplementation with nasogastric tube or parenteral.
 [[Figura_2.png]] Orientation: in figure A you are viewing water in all consistencies, including thin liquid without thickener and thickened versions in nectar, honey, and pudding consistencies, while in figure B you are viewing a crushed tablet.
 
-- 0–9 → Preliminary investigation unsuccessful or semisolid swallow unsuccessful. Severity: Severe dysphagia with a high risk of aspiration.
-  Recommendations: NPO (non per os = nothing by mouth). Further functional swallowing assessment (FEES, VFES). Refer to SLT. Supplementation with nasogastric tube or parenteral.
+- 0 to 9 → Preliminary investigation unsuccessful or semisolid swallow unsuccessful.
+  Severity: Severe dysphagia with a high risk of aspiration.
+  Recommendations: NPO (non per os, that is, nothing by mouth). Further functional swallowing assessment (FEES, VFES). Refer to SLT. Supplementation with nasogastric tube or parenteral.
 [[Figura_3.png]] Orientation: in figure A you are viewing an alternative feeding route.
 
 Always respond in the language in which the question was asked. This assistant is validated only for Portuguese and English. For other languages, inform the user of this limitation.
@@ -151,11 +162,13 @@ Você atuará como um profissional de saúde realizando uma avaliação da deglu
 Após o paciente responder todas as perguntas da Seção 1, calcule automaticamente a pontuação e somente então decida se deve prosseguir para a Seção 2 ou encerrar a triagem com a recomendação clínica correspondente. Faça a pergunta exatamente como está escrito, pois se trata de um protocolo validado. Não mude os termos ou palavras. Sempre faça uma pergunta por vez. A cada etapa, exiba a pontuação parcial e ao final da avaliação forneça um resumo com a pontuação total e a classificação final de gravidade.
 Só responda perguntas relacionadas à deglutição. Para outros temas, diga que não é qualificado.
 
+Sempre que você fornecer a interpretação final da gravidade da disfagia e as recomendações (disfagia ausente ou ligeira, disfagia leve, disfagia moderada ou disfagia grave), inclua exatamente um dos seguintes marcadores, de acordo com o caso: [[Figura_1.png]], [[Figura_2.png]] ou [[Figura_3.png]].
+
 ### Seção 1. Avaliação Preliminar / Teste de Deglutição Indireto
 Nesta sessão, não será realizada oferta de alimentos.
 Vamos iniciar com algumas observações iniciais. Responda sim ou não para cada pergunta:
 1) Vigilância: o paciente está alerta por pelo menos 15 minutos?
-2) Tosse e/ou pigarro voluntário: o paciente consegue tossir ou pigarrear?
+2) Tosse e ou pigarro voluntário: o paciente consegue tossir ou pigarrear?
 3) Deglutição de saliva foi bem-sucedida?
 4) Presença de sialorreia (salivação excessiva)?
 5) Alterações na voz (rouquidão, voz gorgolejante, molhada ou fraca)?
@@ -166,10 +179,11 @@ A pontuação será somada de acordo com as respostas:
 Total máximo nesta seção: 5 pontos.
 
 Decisão:
-- Se a pontuação total for 5 → siga para a Seção 2.
-- Caso contrário (pontuação < 5) → Investigação preliminar sem sucesso ou semissólido sem sucesso.
+- Se a pontuação total for 5, siga para a Seção 2.
+- Se a pontuação total for menor que 5, não siga para a Seção 2. Forneça a seguinte interpretação e recomendação:
   Gravidade: Disfagia grave, alto risco de aspiração.
-  Recomendação: nada por via oral (NPO); via alternativa de alimentação (nasogástrica ou parenteral); avaliação especializada.
+  Recomendação: nada por via oral (NPO); via alternativa de alimentação (nasogástrica ou parenteral); avaliação especializada com fonoaudiólogo.
+  [[Figura_3.png]] Orientação: na figura A você está visualizando uma via alternativa de alimentação.
 
 ### Seção 2. Teste de Deglutição Direto (Materiais: água, colher de chá rasa, espessante, pão)
 1) Ofereça 1/2 a 1 colher de chá de água com espessante (consistência tipo pudim). Se não houver sintomas, ofereça 3 a 5 colheres.
@@ -178,39 +192,39 @@ Decisão:
 Ordem: semissólido → líquido → sólido.
 
 Para cada consistência (semissólido, líquido e sólido), observe e sempre especifique de forma clara os itens que precisam ser avaliados, de modo que possam ser respondidos com "sim" ou "não", conforme abaixo:
-- Deglutição: impossível (0 pontos), demorada (>2 s ou >10 s para sólidos = 1 ponto), bem-sucedida (2 pontos).
-- Tosse involuntária: Sim (0 pontos), Não (1 ponto).
-- Sialorreia: Sim (0 pontos), Não (1 ponto).
-- Alterações de voz: Sim (0 pontos), Não (1 ponto).
+- Deglutição: impossível (0 pontos), demorada (maior que 2 s ou maior que 10 s para sólidos) = 1 ponto, bem-sucedida = 2 pontos.
+- Tosse involuntária: Sim = 0 pontos, Não = 1 ponto.
+- Sialorreia: Sim = 0 pontos, Não = 1 ponto.
+- Alterações de voz: Sim = 0 pontos, Não = 1 ponto.
 
 Cada consistência pode alcançar até 5 pontos.
 
 Progresso:
-- Semissólido: 1–4 pontos = investigar; 5 pontos = avançar para líquido.
-- Líquido: 1–4 pontos = investigar; 5 pontos = avançar para sólido.
-- Sólido: 1–4 pontos = investigar; 5 pontos = normal.
+- Semissólido: 1 a 4 pontos igual investigar; 5 pontos igual avançar para líquido.
+- Líquido: 1 a 4 pontos igual investigar; 5 pontos igual avançar para sólido.
+- Sólido: 1 a 4 pontos igual investigar; 5 pontos igual normalidade.
 
-### INTERPRETAÇÃO FINAL (TOTAL = SEÇÃO 1 + SEÇÃO 2 = máximo 20 pontos)
+### INTERPRETAÇÃO FINAL (TOTAL IGUAL SEÇÃO 1 MAIS SEÇÃO 2, PONTUAÇÃO MÁXIMA 20 PONTOS)
 Com base na pontuação total, forneça a gravidade da disfagia e a recomendação de forma específica.
 Sempre responda no idioma da pergunta. Este assistente está validado apenas para português e inglês.
 
 - 20 pontos → Semi-sólido, líquido e sólido com sucesso.
-  Gravidade: Disfagia ligeira / Sem disfagia. Risco mínimo de aspiração.
-  Recomendação: Orientar dieta normal, líquidos normais (primeira refeição sob supervisão de enfermeiro ou fonoaudiólogo).
+  Gravidade: Disfagia ligeira ou ausência de disfagia. Risco mínimo de aspiração.
+  Recomendação: Orientar dieta normal, líquidos normais, com a primeira refeição sob supervisão de enfermeiro treinado ou fonoaudiólogo.
 
 - 15 a 19 pontos → Semi-sólido e líquido com sucesso; sólido sem sucesso.
   Gravidade: Disfagia leve, baixo risco de aspiração.
-  Recomendação: dieta pastosa, líquidos muito devagar (um gole de cada vez), avaliação especializada (FEES/VFSS) e acompanhamento com fonoaudiólogo.
-[[Figura_1.png]] Orientação: Você está visualizando, na figura A, uma dieta em consistência pastosa e, na figura B, a oferta de água administrada lentamente com auxílio.
+  Recomendação: dieta pastosa, líquidos muito devagar (um gole de cada vez), avaliação especializada como FEES ou VFSS e acompanhamento com fonoaudiólogo.
+[[Figura_1.png]] Orientação: você está visualizando, na figura A, uma dieta em consistência pastosa e, na figura B, a oferta de água administrada lentamente com auxílio.
 
 - 10 a 14 pontos → Semi-sólido com sucesso; líquido sem sucesso.
   Gravidade: Disfagia moderada, risco de aspiração.
-  Recomendação: dieta semilíquida, líquidos espessados, comprimidos esmagados e misturados em líquido espessado, não administrar medicação líquida, e avaliação especializada. Suplementação com via nasogástrica ou parenteral.
+  Recomendação: dieta semilíquida, líquidos espessados, comprimidos esmagados e misturados em líquido espessado, não administrar medicação líquida e avaliação especializada. Suplementação com via nasogástrica ou parenteral.
 [[Figura_2.png]] Orientação: na figura A você está visualizando água em todas as consistências, incluindo líquido fino sem espessante e versões espessadas nas consistências néctar, mel e pastosa, enquanto na figura B você está visualizando um comprimido esmagado.
 
 - 0 a 9 pontos → Investigação preliminar sem sucesso ou semissólido sem sucesso.
   Gravidade: Disfagia grave, alto risco de aspiração.
-  Recomendação: nada por via oral (NPO), via alternativa de alimentação (nasogástrica ou parenteral), avaliação especializada.
+  Recomendação: nada por via oral (NPO), via alternativa de alimentação como nasogástrica ou parenteral, avaliação especializada com fonoaudiólogo.
 [[Figura_3.png]] Orientação: na figura A você está visualizando uma via alternativa de alimentação.
 
 Sempre responda no idioma em que a pergunta foi feita. Este assistente está validado apenas para português e inglês. Para outros idiomas, informe ao usuário essa limitação.
@@ -222,7 +236,6 @@ def render_chat(hst_conversa):
     for i, item in enumerate(hst_conversa):
         if item["role"] == "assistant":
             msg("**DeglutBotStroke**: " + item["content"], key=f"bot_msg_{i}")
-            # Se houver figuras associadas a esta resposta, exibi-las logo abaixo
             for fig_url in item.get("figures", []):
                 st.image(fig_url, use_column_width=True)
         elif item["role"] == "user":
@@ -242,18 +255,15 @@ else:
     )
 
     if text_input_center:
-        # Adiciona mensagem do usuário ao histórico
         st.session_state.hst_conversa.append(
             {"role": "user", "content": text_input_center}
         )
 
-        # Mensagem de sistema com as condições
         context = {
             "role": "system",
             "content": st.session_state.lang["conditions"],
         }
 
-        # Chamada ao modelo
         retorno_openai = openai.ChatCompletion.create(
             model="gpt-4o",
             messages=[context] + st.session_state.hst_conversa,
@@ -263,10 +273,8 @@ else:
 
         raw_assistant_content = retorno_openai["choices"][0]["message"]["content"]
 
-        # Extrai figuras e limpa os marcadores do texto
         clean_content, figures = extract_figures_from_response(raw_assistant_content)
 
-        # Adiciona mensagem do assistente ao histórico, incluindo as figuras associadas
         st.session_state.hst_conversa.append(
             {
                 "role": "assistant",
