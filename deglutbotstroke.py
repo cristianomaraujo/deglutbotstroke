@@ -137,12 +137,17 @@ Based on the total score, provide the severity of dysphagia and a specific recom
 - 15 to 19 → Semisolid and liquid textures successful; solid unsuccessful.
   Severity: Slight dysphagia with a low risk of aspiration.
   Recommendations: Dysphagia diet (pureed and soft food). Liquids very slowly, one sip at a time. Functional swallowing assessments such as Fiberoptic Endoscopic Evaluation of Swallowing (FEES) or Videofluoroscopic Evaluation of Swallowing (VFES). Refer to Speech and Language Therapist (SLT).
-[[Figura_1.png]] Orientation: In figure A you are viewing a diet with a pasty consistency, and in figure B you are viewing water being offered slowly with assistance.
+[[Figura_1.png]] Orientation: In figure A you are viewing a diet with a pasty consistency, and in figure B you are viewing water being offered slowly with assistance. If you want to watch the video that demonstrates how to drink the liquid slowly, access the link https://youtube.com/shorts/ZS0YcDR-iVI?feature=share
 
 - 10 to 14 → Semisolid swallow successful; liquids unsuccessful.
   Severity: Moderate dysphagia with a risk of aspiration.
   Recommendations: Dysphagia diet beginning with semisolid textures (for example, baby food) and additional parenteral feeding. All liquids must be thickened. Pills must be crushed and mixed with thick liquid. No liquid medication. Further functional swallowing assessments (FEES, VFES). Refer to SLT. Supplementation with nasogastric tube or parenteral.
-[[Figura_2.png]] Orientation: in figure A you are viewing water in all consistencies, including thin liquid without thickener and thickened versions in nectar, honey, and pudding consistencies, while in figure B you are viewing a crushed tablet.
+[[Figura_2.png]] Orientation: in figure A you are viewing water in all consistencies, including thin liquid without thickener and thickened versions in nectar, honey, and pudding consistencies, while in figure B you are viewing a crushed tablet. If you want to watch the video that demonstrates how to prepare the consistencies, access the links 1) https://youtube.com/shorts/lkqKJVBrehI?feature=share
+ 2) https://youtube.com/shorts/xjXgmLcxjOA?feature=share
+ 3) https://youtube.com/shorts/w_LYcWvMXyc?feature=share
+ and, if you want to watch the video that shows the consistencies already prepared, access the links 1) https://youtube.com/shorts/2hjD-mQIqEs?feature=share
+ 2) https://youtube.com/shorts/VGxbULGSWsw?feature=share
+ 3) https://youtube.com/shorts/CbMap_CU5oE?feature=share
 
 - 0 to 9 → Preliminary investigation unsuccessful or semisolid swallow unsuccessful.
   Severity: Severe dysphagia with a high risk of aspiration.
@@ -215,12 +220,17 @@ Sempre responda no idioma da pergunta. Este assistente está validado apenas par
 - 15 a 19 pontos → Semi-sólido e líquido com sucesso; sólido sem sucesso.
   Gravidade: Disfagia leve, baixo risco de aspiração.
   Recomendação: dieta pastosa, líquidos muito devagar (um gole de cada vez), avaliação especializada como FEES ou VFSS e acompanhamento com fonoaudiólogo.
-[[Figura_1.png]] Orientação: você está visualizando, na figura A, uma dieta em consistência pastosa e, na figura B, a oferta de água administrada lentamente com auxílio.
+[[Figura_1.png]] Orientação: você está visualizando, na figura A, uma dieta em consistência pastosa e, na figura B, a oferta de água administrada lentamente com auxílio. Se você quiser visualizar o vídeo que demonstra como ingerir o líquido devagar, acesse o link https://youtube.com/shorts/ZS0YcDR-iVI?feature=share
 
 - 10 a 14 pontos → Semi-sólido com sucesso; líquido sem sucesso.
   Gravidade: Disfagia moderada, risco de aspiração.
   Recomendação: dieta semilíquida, líquidos espessados, comprimidos esmagados e misturados em líquido espessado, não administrar medicação líquida e avaliação especializada. Suplementação com via nasogástrica ou parenteral.
-[[Figura_2.png]] Orientação: na figura A você está visualizando água em todas as consistências, incluindo líquido fino sem espessante e versões espessadas nas consistências néctar, mel e pastosa, enquanto na figura B você está visualizando um comprimido esmagado.
+[[Figura_2.png]] Orientação: na figura A você está visualizando água em todas as consistências, incluindo líquido fino sem espessante e versões espessadas nas consistências néctar, mel e pastosa, enquanto na figura B você está visualizando um comprimido esmagado. Se você quiser visualizar o vídeo que demonstra como preparar as consistências, acesse os links 1) https://youtube.com/shorts/lkqKJVBrehI?feature=share
+ 2) https://youtube.com/shorts/xjXgmLcxjOA?feature=share
+ 3) https://youtube.com/shorts/w_LYcWvMXyc?feature=share
+ e, se você quiser visualizar o vídeo que mostra as consistências já preparadas, acesse os links 1) https://youtube.com/shorts/2hjD-mQIqEs?feature=share
+ 2) https://youtube.com/shorts/VGxbULGSWsw?feature=share
+ 3) https://youtube.com/shorts/CbMap_CU5oE?feature=share
 
 - 0 a 9 pontos → Investigação preliminar sem sucesso ou semissólido sem sucesso.
   Gravidade: Disfagia grave, alto risco de aspiração.
@@ -285,3 +295,4 @@ else:
 
     if len(st.session_state.hst_conversa) > 0:
         render_chat(st.session_state.hst_conversa)
+
