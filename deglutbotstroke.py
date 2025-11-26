@@ -2,6 +2,7 @@ import streamlit as st
 import openai
 from streamlit_chat import message as msg
 import os
+import re
 
 # Configuração da API OpenAI
 SENHA_OPEN_AI = os.getenv("SENHA_OPEN_AI")
@@ -22,7 +23,12 @@ if "language_selected" not in st.session_state:
 if "hst_conversa" not in st.session_state:
     st.session_state.hst_conversa = []
 
-# Função utilitária para extrair as figuras da resposta e limpar os marcadores
+# Converte URLs em links markdown
+def linkify(text: str) -> str:
+    pattern = r"(https?://\S+)"
+    return re.sub(pattern, r"[\1](\1)", text)
+
+# Extrai figuras e limpa os marcadores
 def extract_figures_from_response(text: str):
     figures = []
     clean_text = text
@@ -35,7 +41,7 @@ def extract_figures_from_response(text: str):
     clean_text = clean_text.strip()
     return clean_text, figures
 
-# Função para exibir a tela de seleção de idioma
+# Tela de seleção de idioma
 def select_language():
     st.markdown(
         """
@@ -71,7 +77,7 @@ def select_language():
         st.session_state.language_selected = True
     st.markdown("</div>", unsafe_allow_html=True)
 
-# Função para configurar o chatbot
+# Configura o chatbot e o prompt de sistema
 def setup_chatbot():
     if st.session_state.language_choice == "English":
         st.session_state.lang = {
@@ -142,12 +148,7 @@ Based on the total score, provide the severity of dysphagia and a specific recom
 - 10 to 14 → Semisolid swallow successful; liquids unsuccessful.
   Severity: Moderate dysphagia with a risk of aspiration.
   Recommendations: Dysphagia diet beginning with semisolid textures (for example, baby food) and additional parenteral feeding. All liquids must be thickened. Pills must be crushed and mixed with thick liquid. No liquid medication. Further functional swallowing assessments (FEES, VFES). Refer to SLT. Supplementation with nasogastric tube or parenteral.
-[[Figura_2.png]] Orientation: in figure A you are viewing water in all consistencies, including thin liquid without thickener and thickened versions in nectar, honey, and pudding consistencies, while in figure B you are viewing a crushed tablet. If you want to watch the video that demonstrates how to prepare the consistencies, access the links 1) https://youtube.com/shorts/lkqKJVBrehI?feature=share
- 2) https://youtube.com/shorts/xjXgmLcxjOA?feature=share
- 3) https://youtube.com/shorts/w_LYcWvMXyc?feature=share
- and, if you want to watch the video that shows the consistencies already prepared, access the links 1) https://youtube.com/shorts/2hjD-mQIqEs?feature=share
- 2) https://youtube.com/shorts/VGxbULGSWsw?feature=share
- 3) https://youtube.com/shorts/CbMap_CU5oE?feature=share
+[[Figura_2.png]] Orientation: in figure A you are viewing water in all consistencies, including thin liquid without thickener and thickened versions in nectar, honey, and pudding consistencies, while in figure B you are viewing a crushed tablet. If you want to watch the video that demonstrates how to prepare the consistencies, access the links 1) https://youtube.com/shorts/lkqKJVBrehI?feature=share 2) https://youtube.com/shorts/xjXgmLcxjOA?feature=share 3) https://youtube.com/shorts/w_LYcWvMXyc?feature=share and, if you want to watch the video that shows the consistencies already prepared, access the links 1) https://youtube.com/shorts/2hjD-mQIqEs?feature=share 2) https://youtube.com/shorts/VGxbULGSWsw?feature=share 3) https://youtube.com/shorts/CbMap_CU5oE?feature=share
 
 - 0 to 9 → Preliminary investigation unsuccessful or semisolid swallow unsuccessful.
   Severity: Severe dysphagia with a high risk of aspiration.
@@ -197,10 +198,10 @@ Decisão:
 Ordem: semissólido → líquido → sólido.
 
 Para cada consistência (semissólido, líquido e sólido), observe e sempre especifique de forma clara os itens que precisam ser avaliados, de modo que possam ser respondidos com "sim" ou "não", conforme abaixo:
-- Deglutição: impossível (0 pontos), demorada (maior que 2 s ou maior que 10 s para sólidos) = 1 ponto, bem-sucedida = 2 pontos.
-- Tosse involuntária: Sim = 0 pontos, Não = 1 ponto.
-- Sialorreia: Sim = 0 pontos, Não = 1 ponto.
-- Alterações de voz: Sim = 0 pontos, Não = 1 ponto.
+- Deglutição: impossível (0 pontos), demorada (maior que 2 s ou maior que 10 s para sólidos) igual 1 ponto, bem-sucedida igual 2 pontos.
+- Tosse involuntária: Sim igual 0 pontos, Não igual 1 ponto.
+- Sialorreia: Sim igual 0 pontos, Não igual 1 ponto.
+- Alterações de voz: Sim igual 0 pontos, Não igual 1 ponto.
 
 Cada consistência pode alcançar até 5 pontos.
 
@@ -225,12 +226,7 @@ Sempre responda no idioma da pergunta. Este assistente está validado apenas par
 - 10 a 14 pontos → Semi-sólido com sucesso; líquido sem sucesso.
   Gravidade: Disfagia moderada, risco de aspiração.
   Recomendação: dieta semilíquida, líquidos espessados, comprimidos esmagados e misturados em líquido espessado, não administrar medicação líquida e avaliação especializada. Suplementação com via nasogástrica ou parenteral.
-[[Figura_2.png]] Orientação: na figura A você está visualizando água em todas as consistências, incluindo líquido fino sem espessante e versões espessadas nas consistências néctar, mel e pastosa, enquanto na figura B você está visualizando um comprimido esmagado. Se você quiser visualizar o vídeo que demonstra como preparar as consistências, acesse os links 1) https://youtube.com/shorts/lkqKJVBrehI?feature=share
- 2) https://youtube.com/shorts/xjXgmLcxjOA?feature=share
- 3) https://youtube.com/shorts/w_LYcWvMXyc?feature=share
- e, se você quiser visualizar o vídeo que mostra as consistências já preparadas, acesse os links 1) https://youtube.com/shorts/2hjD-mQIqEs?feature=share
- 2) https://youtube.com/shorts/VGxbULGSWsw?feature=share
- 3) https://youtube.com/shorts/CbMap_CU5oE?feature=share
+[[Figura_2.png]] Orientação: na figura A você está visualizando água em todas as consistências, incluindo líquido fino sem espessante e versões espessadas nas consistências néctar, mel e pastosa, enquanto na figura B você está visualizando um comprimido esmagado. Se você quiser visualizar o vídeo que demonstra como preparar as consistências, acesse os links 1) https://youtube.com/shorts/lkqKJVBrehI?feature=share 2) https://youtube.com/shorts/xjXgmLcxjOA?feature=share 3) https://youtube.com/shorts/w_LYcWvMXyc?feature=share e, se você quiser visualizar o vídeo que mostra as consistências já preparadas, acesse os links 1) https://youtube.com/shorts/2hjD-mQIqEs?feature=share 2) https://youtube.com/shorts/VGxbULGSWsw?feature=share 3) https://youtube.com/shorts/CbMap_CU5oE?feature=share
 
 - 0 a 9 pontos → Investigação preliminar sem sucesso ou semissólido sem sucesso.
   Gravidade: Disfagia grave, alto risco de aspiração.
@@ -241,7 +237,7 @@ Sempre responda no idioma em que a pergunta foi feita. Este assistente está val
 """
         }
 
-# Função para renderizar o chat
+# Renderiza o chat
 def render_chat(hst_conversa):
     for i, item in enumerate(hst_conversa):
         if item["role"] == "assistant":
@@ -284,6 +280,7 @@ else:
         raw_assistant_content = retorno_openai["choices"][0]["message"]["content"]
 
         clean_content, figures = extract_figures_from_response(raw_assistant_content)
+        clean_content = linkify(clean_content)
 
         st.session_state.hst_conversa.append(
             {
@@ -295,4 +292,3 @@ else:
 
     if len(st.session_state.hst_conversa) > 0:
         render_chat(st.session_state.hst_conversa)
-
