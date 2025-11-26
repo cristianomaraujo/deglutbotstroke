@@ -10,15 +10,36 @@ openai.api_key = SENHA_OPEN_AI
 # URLs das imagens
 logo_url = "https://github.com/cristianomaraujo/deglutbotstroke/blob/main/Eng.jpg?raw=true"
 
+FIGURE_URLS = {
+    "[[Figura_1.png]]": "https://github.com/cristianomaraujo/deglutbotstroke/blob/main/Figura_1.png?raw=true",
+    "[[Figura_2.png]]": "https://github.com/cristianomaraujo/deglutbotstroke/blob/main/Figura_2.png?raw=true",
+    "[[Figura_3.png]]": "https://github.com/cristianomaraujo/deglutbotstroke/blob/main/Figura_3.png?raw=true",
+}
+
 # Inicialização do estado da sessão
-if 'language_selected' not in st.session_state:
+if "language_selected" not in st.session_state:
     st.session_state.language_selected = False
-if 'hst_conversa' not in st.session_state:
+if "hst_conversa" not in st.session_state:
     st.session_state.hst_conversa = []
+
+# Função utilitária para extrair as figuras da resposta e limpar os marcadores
+def extract_figures_from_response(text: str):
+    figures = []
+    clean_text = text
+
+    for marker, url in FIGURE_URLS.items():
+        if marker in clean_text:
+            clean_text = clean_text.replace(marker, "")
+            figures.append(url)
+
+    # Remove espaços extras nas pontas
+    clean_text = clean_text.strip()
+    return clean_text, figures
 
 # Função para exibir a tela de seleção de idioma
 def select_language():
-    st.markdown("""
+    st.markdown(
+        """
         <style>
         .centered {
             display: flex;
@@ -37,30 +58,31 @@ def select_language():
             border-radius: 10px;
         }
         </style>
-        """, unsafe_allow_html=True)
+        """,
+        unsafe_allow_html=True,
+    )
     st.markdown('<div class="centered container">', unsafe_allow_html=True)
     st.image(logo_url, use_column_width=True)
     st.title("Welcome to DeglutBotStroke!")
     st.subheader("Choose your language / Escolha seu idioma")
     language = st.radio("", ["English", "Português"])
-    st.markdown('<br>', unsafe_allow_html=True)
-    if st.button("Continue", key='continue_button'):
+    st.markdown("<br>", unsafe_allow_html=True)
+    if st.button("Continue", key="continue_button"):
         st.session_state.language_choice = language
         st.session_state.language_selected = True
-    st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
 
 # Função para configurar o chatbot
-
 def setup_chatbot():
     if st.session_state.language_choice == "English":
         st.session_state.lang = {
-            "title": "I’m DeglutBotStroke, an AI-powered chatbot designed to assist you in screening for stroke diagnosis in patients with swallowing complaints.",
+            "title": "I’m DeglutBotStroke, an AI-powered chatbot designed to assist you in screening for stroke diagnosis in patients with swallowing complaints.",
             "chat_input": "Chat with me by typing in the field below",
             "initial_message": "Hello! Let's begin the dysphagia screening. Please answer the following questions:",
             "conditions": """You are a virtual assistant named DeglutBot Stroke. Your goal is to assist in the initial screening of dysphagia in patients with a history of Stroke based on the GUSS protocol.
 You will act as a healthcare professional performing a swallowing assessment in two stages: the first is preliminary and indirect (without offering food); the second is direct (with food trials) using specific consistencies.
 After the patient answers all the questions in Section 1, automatically calculate the score and then decide whether to proceed to Section 2 or end the screening with the corresponding clinical recommendation.
-Ask each question exactly as written, since this is a validated protocol — do not change the wording or phrasing. Always ask one question at a time.
+Ask each question exactly as written, since this is a validated protocol. Do not change the wording or phrasing. Always ask one question at a time.
 At each stage, display the partial score, and at the end of the assessment, provide a summary with the total score and the final severity classification.
 Only respond to questions related to swallowing. For other topics, state that you are not qualified to answer.
 
@@ -82,7 +104,7 @@ Decision rule: If the total score is 5, proceed to Section 2. Otherwise, recomme
 ### Section 2. Direct Swallowing Test (Material: Aqua bi, flat teaspoon, food thickener, bread)
 Order of administration:
 - First administer 1/2 to up to a flat teaspoon of Aqua bi with food thickener (pudding-like consistency). If there are no symptoms, apply 3 to 5 teaspoons. Assess after the 5th spoon.
-- 3, 5, 10, 20 ml Aqua bi — if there are no symptoms continue with 50 ml Aqua bi. Assess and stop the investigation when any stopping criterion is observed.
+- 3, 5, 10, 20 ml Aqua bi. If there are no symptoms continue with 50 ml Aqua bi. Assess and stop the investigation when any stopping criterion is observed.
 - Clinical: dry bread; FEES: dry bread dipped in coloured liquid.
 Assessment order of consistencies: semi-solid → liquid → solid.
 
@@ -106,12 +128,15 @@ Based on the total score, provide the severity of dysphagia and a specific recom
 
 - 15–19 → Semisolid and liquid textures successful; solid unsuccessful. Severity: Slight dysphagia with a low risk of aspiration.
   Recommendations: Dysphagia diet (pureed and soft food). Liquids very slowly, one sip at a time. Functional swallowing assessments such as Fiberoptic Endoscopic Evaluation of Swallowing (FEES) or Videofluoroscopic Evaluation of Swallowing (VFES). Refer to Speech and Language Therapist (SLT).
+[[Figura_1.png]] Orientation: In figure A you are viewing a diet with a pasty consistency, and in figure B you are viewing water being offered slowly with assistance.
 
 - 10–14 → Semisolid swallow successful; liquids unsuccessful. Severity: Moderate dysphagia with a risk of aspiration.
   Recommendations: Dysphagia diet beginning with semisolid textures (e.g., baby food) and additional parenteral feeding. All liquids must be thickened. Pills must be crushed and mixed with thick liquid. No liquid medication. Further functional swallowing assessments (FEES, VFES). Refer to SLT. Supplementation with nasogastric tube or parenteral.
+[[Figura_2.png]] Orientation: in figure A you are viewing water in all consistencies, including thin liquid without thickener and thickened versions in nectar, honey, and pudding consistencies, while in figure B you are viewing a crushed tablet.
 
 - 0–9 → Preliminary investigation unsuccessful or semisolid swallow unsuccessful. Severity: Severe dysphagia with a high risk of aspiration.
   Recommendations: NPO (non per os = nothing by mouth). Further functional swallowing assessment (FEES, VFES). Refer to SLT. Supplementation with nasogastric tube or parenteral.
+[[Figura_3.png]] Orientation: in figure A you are viewing an alternative feeding route.
 
 Always respond in the language in which the question was asked. This assistant is validated only for Portuguese and English. For other languages, inform the user of this limitation.
 """
@@ -123,7 +148,7 @@ Always respond in the language in which the question was asked. This assistant i
             "initial_message": "Olá! Vamos começar a triagem de disfagia. Por favor, responda às seguintes perguntas:",
             "conditions": """Você é um assistente virtual chamado DeglutBot Stroke. Seu objetivo é auxiliar na triagem inicial de disfagia em pacientes adultos e idosos com histórico de Acidente Vascular Cerebral (AVC), baseado no protocolo GUSS.
 Você atuará como um profissional de saúde realizando uma avaliação da deglutição em duas etapas: a primeira preliminar e indireta (sem oferta de alimentos); a segunda etapa, de forma direta (com oferta de alimento) nas consistências específicas.
-Após o paciente responder todas as perguntas da Seção 1, calcule automaticamente a pontuação e somente então decida se deve prosseguir para a Seção 2 ou encerrar a triagem com a recomendação clínica correspondente. Faça a pergunta exatamente como está escrito, pois se trata de um protocolo validado — não mude os termos ou palavras — sempre faça uma pergunta por vez. A cada etapa, exiba a pontuação parcial e ao final da avaliação forneça um resumo com a pontuação total e a classificação final de gravidade.
+Após o paciente responder todas as perguntas da Seção 1, calcule automaticamente a pontuação e somente então decida se deve prosseguir para a Seção 2 ou encerrar a triagem com a recomendação clínica correspondente. Faça a pergunta exatamente como está escrito, pois se trata de um protocolo validado. Não mude os termos ou palavras. Sempre faça uma pergunta por vez. A cada etapa, exiba a pontuação parcial e ao final da avaliação forneça um resumo com a pontuação total e a classificação final de gravidade.
 Só responda perguntas relacionadas à deglutição. Para outros temas, diga que não é qualificado.
 
 ### Seção 1. Avaliação Preliminar / Teste de Deglutição Indireto
@@ -176,14 +201,17 @@ Sempre responda no idioma da pergunta. Este assistente está validado apenas par
 - 15 a 19 pontos → Semi-sólido e líquido com sucesso; sólido sem sucesso.
   Gravidade: Disfagia leve, baixo risco de aspiração.
   Recomendação: dieta pastosa, líquidos muito devagar (um gole de cada vez), avaliação especializada (FEES/VFSS) e acompanhamento com fonoaudiólogo.
+[[Figura_1.png]] Orientação: Você está visualizando, na figura A, uma dieta em consistência pastosa e, na figura B, a oferta de água administrada lentamente com auxílio.
 
 - 10 a 14 pontos → Semi-sólido com sucesso; líquido sem sucesso.
   Gravidade: Disfagia moderada, risco de aspiração.
   Recomendação: dieta semilíquida, líquidos espessados, comprimidos esmagados e misturados em líquido espessado, não administrar medicação líquida, e avaliação especializada. Suplementação com via nasogástrica ou parenteral.
+[[Figura_2.png]] Orientação: na figura A você está visualizando água em todas as consistências, incluindo líquido fino sem espessante e versões espessadas nas consistências néctar, mel e pastosa, enquanto na figura B você está visualizando um comprimido esmagado.
 
 - 0 a 9 pontos → Investigação preliminar sem sucesso ou semissólido sem sucesso.
   Gravidade: Disfagia grave, alto risco de aspiração.
   Recomendação: nada por via oral (NPO), via alternativa de alimentação (nasogástrica ou parenteral), avaliação especializada.
+[[Figura_3.png]] Orientação: na figura A você está visualizando uma via alternativa de alimentação.
 
 Sempre responda no idioma em que a pergunta foi feita. Este assistente está validado apenas para português e inglês. Para outros idiomas, informe ao usuário essa limitação.
 """
@@ -191,12 +219,14 @@ Sempre responda no idioma em que a pergunta foi feita. Este assistente está val
 
 # Função para renderizar o chat
 def render_chat(hst_conversa):
-    for i in range(len(hst_conversa)):
-        if hst_conversa[i]['role'] == 'assistant':
-            msg("**DeglutBotStroke**: " + hst_conversa[i]['content'], key=f"bot_msg_{i}")
-        elif hst_conversa[i]['role'] == 'user':
-            msg("**You**: " + hst_conversa[i]['content'], is_user=True, key=f"user_msg_{i}")
-
+    for i, item in enumerate(hst_conversa):
+        if item["role"] == "assistant":
+            msg("**DeglutBotStroke**: " + item["content"], key=f"bot_msg_{i}")
+            # Se houver figuras associadas a esta resposta, exibi-las logo abaixo
+            for fig_url in item.get("figures", []):
+                st.image(fig_url, use_column_width=True)
+        elif item["role"] == "user":
+            msg("**You**: " + item["content"], is_user=True, key=f"user_msg_{i}")
 
 # Execução principal
 if not st.session_state.language_selected:
@@ -205,25 +235,45 @@ else:
     setup_chatbot()
     st.image(logo_url, use_column_width=True)
     st.write(st.session_state.lang["title"])
-    text_input_center = st.chat_input(st.session_state.lang["chat_input"], key="chat_input_" + st.session_state.language_choice)
+
+    text_input_center = st.chat_input(
+        st.session_state.lang["chat_input"],
+        key="chat_input_" + st.session_state.language_choice,
+    )
+
     if text_input_center:
-        st.session_state.hst_conversa.append({"role": "user", "content": text_input_center})
-        context = {"role": "system", "content": st.session_state.lang["conditions"]}
+        # Adiciona mensagem do usuário ao histórico
+        st.session_state.hst_conversa.append(
+            {"role": "user", "content": text_input_center}
+        )
+
+        # Mensagem de sistema com as condições
+        context = {
+            "role": "system",
+            "content": st.session_state.lang["conditions"],
+        }
+
+        # Chamada ao modelo
         retorno_openai = openai.ChatCompletion.create(
             model="gpt-4o",
             messages=[context] + st.session_state.hst_conversa,
             max_tokens=1024,
-            n=1
+            n=1,
         )
+
+        raw_assistant_content = retorno_openai["choices"][0]["message"]["content"]
+
+        # Extrai figuras e limpa os marcadores do texto
+        clean_content, figures = extract_figures_from_response(raw_assistant_content)
+
+        # Adiciona mensagem do assistente ao histórico, incluindo as figuras associadas
         st.session_state.hst_conversa.append(
-            {"role": "assistant", "content": retorno_openai['choices'][0]['message']['content']})
+            {
+                "role": "assistant",
+                "content": clean_content,
+                "figures": figures,
+            }
+        )
+
     if len(st.session_state.hst_conversa) > 0:
         render_chat(st.session_state.hst_conversa)
-
-
-
-
-
-
-
-
